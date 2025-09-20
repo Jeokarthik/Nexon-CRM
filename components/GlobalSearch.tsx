@@ -83,11 +83,11 @@ const GlobalSearch: React.FC<GlobalSearchProps> = ({ allData, onResultClick }) =
 
     const getBadgeColor = (type: SearchResult['type']) => {
         switch (type) {
-            case 'Lead': return 'bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-300';
-            case 'Contact': return 'bg-purple-100 text-purple-800 dark:bg-purple-900/50 dark:text-purple-300';
-            case 'Deal': return 'bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300';
-            case 'Task': return 'bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-300';
-            default: return 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200';
+            case 'Lead': return 'bg-blue-100 text-blue-800';
+            case 'Contact': return 'bg-purple-100 text-purple-800';
+            case 'Deal': return 'bg-green-100 text-green-800';
+            case 'Task': return 'bg-amber-100 text-amber-800';
+            default: return 'bg-gray-100 text-gray-800';
         }
     };
     
@@ -105,22 +105,22 @@ const GlobalSearch: React.FC<GlobalSearchProps> = ({ allData, onResultClick }) =
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     onFocus={() => setIsFocused(true)}
-                    className="w-full p-2 pl-10 text-sm border-none bg-gray-200 dark:bg-gray-700 rounded-full text-gray-900 dark:text-gray-200 focus:ring-2 focus:ring-indigo-400 focus:bg-white dark:focus:bg-gray-600 outline-none transition-all duration-200"
+                    className="w-full p-2 pl-10 text-sm border-none bg-gray-200 rounded-full text-gray-900 focus:ring-2 focus:ring-indigo-400 focus:bg-white outline-none transition-all duration-200"
                     aria-label="Global search"
                 />
             </div>
 
             {showResults && (
-                <div className="absolute z-10 w-full mt-2 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-lg overflow-hidden">
+                <div className="absolute z-10 w-full mt-2 bg-white rounded-xl border border-gray-200 shadow-lg overflow-hidden">
                     {results.length > 0 ? (
-                        <ul className="max-h-80 overflow-y-auto divide-y divide-gray-200 dark:divide-gray-700">
+                        <ul className="max-h-80 overflow-y-auto divide-y divide-gray-200">
                             {results.map(result => (
                                 <li key={`${result.type}-${result.item.id}`}>
-                                    <button onClick={() => handleResultClick(result)} className="block w-full text-left p-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-150">
+                                    <button onClick={() => handleResultClick(result)} className="block w-full text-left p-4 hover:bg-gray-50 transition-colors duration-150">
                                         <div className="flex justify-between items-center">
                                             <div>
-                                                <p className="font-semibold text-gray-900 dark:text-gray-100">{result.name}</p>
-                                                <p className="text-sm text-gray-500 dark:text-gray-400">{result.context}</p>
+                                                <p className="font-semibold text-gray-900">{result.name}</p>
+                                                <p className="text-sm text-gray-500">{result.context}</p>
                                             </div>
                                             <span className={`px-2.5 py-0.5 text-xs font-medium rounded-full ${getBadgeColor(result.type)}`}>
                                                 {result.type}
@@ -132,7 +132,7 @@ const GlobalSearch: React.FC<GlobalSearchProps> = ({ allData, onResultClick }) =
                         </ul>
                     ) : (
                          <div className="p-4">
-                             <p className="text-center text-gray-500 dark:text-gray-400">No results found for "{searchTerm}"</p>
+                             <p className="text-center text-gray-500">No results found for "{searchTerm}"</p>
                         </div>
                     )}
                 </div>

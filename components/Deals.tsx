@@ -24,18 +24,18 @@ const DealModal: React.FC<DealModalProps> = ({ onSave, onClose }) => {
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50 p-4" onClick={onClose}>
-            <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 w-full max-w-md" onClick={e => e.stopPropagation()}>
-                <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 p-4 border-b dark:border-gray-600">Add New Deal</h2>
+            <div className="bg-white rounded-xl border border-gray-200 w-full max-w-md" onClick={e => e.stopPropagation()}>
+                <h2 className="text-xl font-bold text-gray-900 p-4 border-b">Add New Deal</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="p-6 space-y-4">
-                        <input name="title" value={formData.title} onChange={handleChange} placeholder="Deal Title" className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600" required />
-                        <input name="company" value={formData.company} onChange={handleChange} placeholder="Company" className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600" />
-                        <input name="contactName" value={formData.contactName} onChange={handleChange} placeholder="Contact Name" className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600" />
-                        <input name="value" type="number" value={formData.value} onChange={handleChange} placeholder="Value" className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600" required />
-                        <input name="closeDate" type="date" value={formData.closeDate} onChange={handleChange} className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600" required />
+                        <input name="title" value={formData.title} onChange={handleChange} placeholder="Deal Title" className="w-full p-2 border rounded" required />
+                        <input name="company" value={formData.company} onChange={handleChange} placeholder="Company" className="w-full p-2 border rounded" />
+                        <input name="contactName" value={formData.contactName} onChange={handleChange} placeholder="Contact Name" className="w-full p-2 border rounded" />
+                        <input name="value" type="number" value={formData.value} onChange={handleChange} placeholder="Value" className="w-full p-2 border rounded" required />
+                        <input name="closeDate" type="date" value={formData.closeDate} onChange={handleChange} className="w-full p-2 border rounded" required />
                     </div>
-                    <div className="flex justify-end p-4 border-t dark:border-gray-600">
-                        <button type="button" onClick={onClose} className="px-4 py-2 bg-gray-200 dark:bg-gray-600 rounded mr-2">Cancel</button>
+                    <div className="flex justify-end p-4 border-t">
+                        <button type="button" onClick={onClose} className="px-4 py-2 bg-gray-200 rounded mr-2">Cancel</button>
                         <button type="submit" className="px-4 py-2 bg-[#4F46E5] text-white rounded">Save Deal</button>
                     </div>
                 </form>
@@ -56,17 +56,17 @@ const DealCard: React.FC<{
             draggable
             onDragStart={(e) => onDragStart(e, deal.id)}
             onDragEnd={onDragEnd}
-            className={`bg-white dark:bg-gray-700 p-4 mb-4 rounded-xl cursor-grab active:cursor-grabbing border border-gray-200 dark:border-gray-600 shadow-sm transition-all duration-200 hover:shadow-md group ${isDragging ? 'opacity-40 border-dashed border-indigo-500 scale-95' : ''}`}
+            className={`bg-white p-4 mb-4 rounded-xl cursor-grab active:cursor-grabbing border border-gray-200 shadow-sm transition-all duration-200 hover:shadow-md group ${isDragging ? 'opacity-40 border-dashed border-indigo-500 scale-95' : ''}`}
         >
             <div className="flex justify-between items-start">
-                <h4 className="font-semibold text-gray-800 dark:text-gray-100 pr-2">{deal.title}</h4>
+                <h4 className="font-semibold text-gray-800 pr-2">{deal.title}</h4>
                 <button onClick={() => onDelete(deal.id)} className="text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity">
                     <TrashIcon/>
                 </button>
             </div>
-            <p className="text-sm text-gray-500 dark:text-gray-300">{deal.company}</p>
-            <p className="text-lg font-semibold text-gray-900 dark:text-gray-50 mt-2">${deal.value.toLocaleString()}</p>
-            <p className="text-xs text-gray-400 dark:text-gray-400 mt-1">Close Date: {new Date(deal.closeDate).toLocaleDateString()}</p>
+            <p className="text-sm text-gray-500">{deal.company}</p>
+            <p className="text-lg font-semibold text-gray-900 mt-2">${deal.value.toLocaleString()}</p>
+            <p className="text-xs text-gray-400 mt-1">Close Date: {new Date(deal.closeDate).toLocaleDateString()}</p>
         </div>
     );
 };
@@ -85,11 +85,11 @@ const DealColumn: React.FC<{
 }> = ({ title, status, deals, onDragStart, onDragEnd, onDrop, onDeleteDeal, onDragOver, isDraggingOver, draggedDealId }) => {
     return (
         <div 
-            className={`bg-white rounded-xl shadow-sm p-4 flex-1 min-w-[280px] border border-gray-200 transition-colors duration-200 dark:bg-gray-800 dark:border-gray-700 ${isDraggingOver ? 'bg-indigo-50 dark:bg-indigo-900/40' : 'bg-white dark:bg-gray-800'}`}
+            className={`bg-white rounded-xl shadow-sm p-4 flex-1 min-w-[280px] border border-gray-200 transition-colors duration-200 ${isDraggingOver ? 'bg-indigo-50' : 'bg-white'}`}
             onDragOver={(e) => onDragOver(e, status)}
             onDrop={(e) => onDrop(e, status)}
         >
-            <h3 className="text-base font-semibold mb-4 text-gray-900 dark:text-gray-100 border-b border-gray-200 dark:border-gray-700 pb-2">
+            <h3 className="text-base font-semibold mb-4 text-gray-900 border-b border-gray-200 pb-2">
                 {title} <span className="text-sm font-normal text-gray-500">{deals.length}</span>
             </h3>
             <div className="h-full">
@@ -177,12 +177,12 @@ const Deals: React.FC<DealsProps> = ({ deals, setDeals }) => {
     return (
         <div className="h-full flex flex-col">
             <div className="flex-shrink-0">
-                <h1 className="text-2xl font-bold mb-6 text-gray-900 dark:text-gray-100 sr-only md:not-sr-only">Deals Pipeline</h1>
+                <h1 className="text-2xl font-bold mb-6 text-gray-900 sr-only md:not-sr-only">Deals Pipeline</h1>
                 <div className="flex flex-wrap gap-4 mb-4">
                      <select
                         value={statusFilter}
                         onChange={(e) => setStatusFilter(e.target.value as DealStatus | 'all')}
-                        className="p-2 border border-gray-300 rounded-lg bg-white text-gray-900 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 outline-none"
+                        className="p-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 outline-none"
                         aria-label="Filter by status"
                     >
                         <option value="all">All Statuses</option>
@@ -193,7 +193,7 @@ const Deals: React.FC<DealsProps> = ({ deals, setDeals }) => {
                     <select
                         value={sortBy}
                         onChange={(e) => setSortBy(e.target.value as 'closeDate' | 'value')}
-                        className="p-2 border border-gray-300 rounded-lg bg-white text-gray-900 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 outline-none"
+                        className="p-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 outline-none"
                         aria-label="Sort by"
                     >
                         <option value="closeDate">Sort by Close Date</option>

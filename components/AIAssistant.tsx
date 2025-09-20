@@ -23,18 +23,18 @@ const AIAssistant: React.FC = () => {
 
     return (
         <div>
-            <h1 className="text-2xl font-bold mb-6 text-gray-900 dark:text-gray-100 sr-only md:not-sr-only">AI Assistant</h1>
+            <h1 className="text-2xl font-bold mb-6 text-gray-900 sr-only md:not-sr-only">AI Assistant</h1>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div className="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
-                    <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Email Generator</h2>
+                <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+                    <h2 className="text-xl font-semibold mb-4 text-gray-900">Email Generator</h2>
                     
                     <div className="mb-4">
-                        <label htmlFor="emailType" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Email Type</label>
+                        <label htmlFor="emailType" className="block text-sm font-medium text-gray-700">Email Type</label>
                         <select
                             id="emailType"
                             value={emailType}
                             onChange={(e) => setEmailType(e.target.value as 'follow-up' | 'outreach' | 'reminder')}
-                            className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 sm:text-sm rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600"
+                            className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 sm:text-sm rounded-lg"
                         >
                             <option value="follow-up">Follow-up</option>
                             <option value="outreach">Cold Outreach</option>
@@ -43,13 +43,13 @@ const AIAssistant: React.FC = () => {
                     </div>
 
                     <div className="mb-4">
-                        <label htmlFor="prompt" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                        <label htmlFor="prompt" className="block text-sm font-medium text-gray-700">
                             Describe what the email should be about
                         </label>
                         <textarea
                             id="prompt"
                             rows={4}
-                            className="mt-1 block w-full sm:text-sm border-gray-300 bg-white text-gray-900 rounded-lg focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 outline-none dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600"
+                            className="mt-1 block w-full sm:text-sm border-gray-300 bg-white text-gray-900 rounded-lg focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 outline-none"
                             placeholder="e.g., Follow up with John from Acme Corp about the proposal we sent last week."
                             value={prompt}
                             onChange={(e) => setPrompt(e.target.value)}
@@ -75,10 +75,10 @@ const AIAssistant: React.FC = () => {
                     </div>
                 </div>
 
-                <div className="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
-                     <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Generated Email</h2>
-                     <div className="prose prose-sm max-w-none bg-gray-50 dark:bg-gray-900 dark:text-gray-300 rounded-md p-4 h-96 overflow-y-auto whitespace-pre-wrap font-sans">
-                        {generatedEmail || <span className="text-gray-400 dark:text-gray-500">Your generated email will appear here...</span>}
+                <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+                     <h2 className="text-xl font-semibold mb-4 text-gray-900">Generated Email</h2>
+                     <div className="prose prose-sm max-w-none bg-gray-50 rounded-md p-4 h-96 overflow-y-auto whitespace-pre-wrap font-sans">
+                        {generatedEmail || <span className="text-gray-400">Your generated email will appear here...</span>}
                      </div>
                 </div>
             </div>

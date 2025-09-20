@@ -35,14 +35,14 @@ const Leads: React.FC<LeadsProps> = ({ leads, onSelectLead }) => {
 
     return (
         <div>
-            <h1 className="text-2xl font-bold mb-6 text-gray-900 sr-only md:not-sr-only dark:text-gray-100">Leads</h1>
+            <h1 className="text-2xl font-bold mb-6 text-gray-900 sr-only md:not-sr-only">Leads</h1>
             <div className="flex justify-between items-center mb-4">
                 <input
                     type="text"
                     placeholder="Search by name, company, or email..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full max-w-md p-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 outline-none dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-indigo-500/50"
+                    className="w-full max-w-md p-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 outline-none"
                     aria-label="Search leads"
                 />
                 <button 
@@ -53,10 +53,10 @@ const Leads: React.FC<LeadsProps> = ({ leads, onSelectLead }) => {
                     <span className="ml-2">Add Lead</span>
                 </button>
             </div>
-            <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden">
+            <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
                 <div className="overflow-x-auto">
-                    <table className="min-w-full w-full text-sm text-left text-gray-600 dark:text-gray-300">
-                        <thead className="text-xs text-gray-500 dark:text-gray-400 uppercase bg-gray-50 dark:bg-gray-700/50">
+                    <table className="min-w-full w-full text-sm text-left text-gray-600">
+                        <thead className="text-xs text-gray-500 uppercase bg-gray-50">
                             <tr>
                                 <th scope="col" className="px-6 py-3 font-semibold">Name</th>
                                 <th scope="col" className="px-6 py-3 font-semibold">Company</th>
@@ -68,8 +68,8 @@ const Leads: React.FC<LeadsProps> = ({ leads, onSelectLead }) => {
                         </thead>
                         <tbody>
                             {filteredLeads.map((lead, index) => (
-                                <tr key={lead.id} className={`hover:bg-gray-50 dark:hover:bg-gray-700/50 ${index < filteredLeads.length -1 ? 'border-b border-gray-200 dark:border-gray-700' : ''}`}>
-                                    <td className="px-6 py-4 text-gray-900 dark:text-gray-100">
+                                <tr key={lead.id} className={`hover:bg-gray-50 ${index < filteredLeads.length -1 ? 'border-b border-gray-200' : ''}`}>
+                                    <td className="px-6 py-4 text-gray-900">
                                          <button 
                                             onClick={() => onSelectLead(lead)} 
                                             className="font-medium text-[#4F46E5] hover:underline whitespace-nowrap"

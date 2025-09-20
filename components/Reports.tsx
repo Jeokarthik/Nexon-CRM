@@ -1,7 +1,6 @@
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { Deal, Lead, DealStatus } from '../types';
-import { useTheme } from '../hooks/useTheme';
 
 interface ReportsProps {
     deals: Deal[];
@@ -9,15 +8,13 @@ interface ReportsProps {
 }
 
 const Reports: React.FC<ReportsProps> = ({ deals, leads }) => {
-    const { theme } = useTheme();
-
-    const gridColor = theme === 'dark' ? '#374151' : '#e5e7eb';
-    const textColor = theme === 'dark' ? '#9ca3af' : '#6b7280';
+    const gridColor = '#e5e7eb';
+    const textColor = '#6b7280';
     
     const tooltipStyle = {
-        backgroundColor: theme === 'dark' ? 'rgb(31 41 55)' : '#ffffff',
-        borderColor: theme === 'dark' ? 'rgb(55 65 81)' : '#e5e7eb',
-        color: theme === 'dark' ? '#f9fafb' : '#1f2937',
+        backgroundColor: '#ffffff',
+        borderColor: '#e5e7eb',
+        color: '#1f2937',
         borderRadius: '12px',
     };
 
@@ -83,11 +80,11 @@ const Reports: React.FC<ReportsProps> = ({ deals, leads }) => {
 
     return (
         <div>
-            <h1 className="text-2xl font-bold mb-6 text-gray-900 dark:text-gray-100 sr-only md:not-sr-only">Reports & Analytics</h1>
+            <h1 className="text-2xl font-bold mb-6 text-gray-900 sr-only md:not-sr-only">Reports & Analytics</h1>
 
             <div className="flex flex-wrap gap-4 mb-8">
                 <select 
-                    className="p-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 outline-none dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600"
+                    className="p-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 outline-none"
                     aria-label="Filter by date range"
                 >
                     <option>Last 30 Days</option>
@@ -96,7 +93,7 @@ const Reports: React.FC<ReportsProps> = ({ deals, leads }) => {
                     <option>All Time</option>
                 </select>
                 <select 
-                    className="p-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 outline-none dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600"
+                    className="p-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 outline-none"
                     aria-label="Filter by team"
                 >
                     <option>All Teams</option>
@@ -106,8 +103,8 @@ const Reports: React.FC<ReportsProps> = ({ deals, leads }) => {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div className="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
-                    <h2 className="text-lg font-medium mb-4 text-gray-900 dark:text-gray-100">Deal Value in Pipeline</h2>
+                <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+                    <h2 className="text-lg font-medium mb-4 text-gray-900">Deal Value in Pipeline</h2>
                      <ResponsiveContainer width="100%" height={300}>
                         <PieChart>
                             <Pie
@@ -134,8 +131,8 @@ const Reports: React.FC<ReportsProps> = ({ deals, leads }) => {
                         </PieChart>
                     </ResponsiveContainer>
                 </div>
-                <div className="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
-                    <h2 className="text-lg font-medium mb-4 text-gray-900 dark:text-gray-100">Lead Conversion Funnel</h2>
+                <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+                    <h2 className="text-lg font-medium mb-4 text-gray-900">Lead Conversion Funnel</h2>
                     <ResponsiveContainer width="100%" height={300}>
                         <BarChart data={leadConversionData} layout="vertical" margin={{ top: 5, right: 20, left: 20, bottom: 5 }}>
                             <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
@@ -150,8 +147,8 @@ const Reports: React.FC<ReportsProps> = ({ deals, leads }) => {
                         </BarChart>
                     </ResponsiveContainer>
                 </div>
-                <div className="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
-                    <h2 className="text-lg font-medium mb-4 text-gray-900 dark:text-gray-100">Monthly Sales Performance</h2>
+                <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+                    <h2 className="text-lg font-medium mb-4 text-gray-900">Monthly Sales Performance</h2>
                     <ResponsiveContainer width="100%" height={300}>
                         <BarChart data={monthlyPerformanceData} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>
                             <CartesianGrid strokeDasharray="3 3" stroke={gridColor} vertical={false} />
@@ -167,8 +164,8 @@ const Reports: React.FC<ReportsProps> = ({ deals, leads }) => {
                         </BarChart>
                     </ResponsiveContainer>
                 </div>
-                <div className="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
-                    <h2 className="text-lg font-medium mb-4 text-gray-900 dark:text-gray-100">Lead Source Effectiveness</h2>
+                <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+                    <h2 className="text-lg font-medium mb-4 text-gray-900">Lead Source Effectiveness</h2>
                     <ResponsiveContainer width="100%" height={300}>
                         <BarChart data={leadSourceEffectivenessData} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>
                             <CartesianGrid strokeDasharray="3 3" stroke={gridColor} vertical={false} />

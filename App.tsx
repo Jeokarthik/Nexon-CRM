@@ -283,7 +283,7 @@ const App: React.FC = () => {
     }
 
     return (
-        <div className="flex h-screen bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+        <div className="flex h-screen bg-gray-100 text-gray-800 transition-colors duration-300">
             <Sidebar 
               activeView={activeView} 
               setActiveView={setActiveView}
@@ -292,19 +292,19 @@ const App: React.FC = () => {
               setIsOpen={setIsSidebarOpen}
             />
             <div className="flex flex-col flex-1 w-full overflow-hidden">
-                 <header className="sticky top-0 z-20 bg-gray-100/80 dark:bg-gray-900/80 backdrop-blur-md">
-                    <div className="flex justify-between items-center p-4 md:p-6 border-b border-gray-200 dark:border-gray-700">
+                 <header className="sticky top-0 z-20 bg-gray-100/80 backdrop-blur-md">
+                    <div className="flex justify-between items-center p-4 md:p-6 border-b border-gray-200">
                         <div className="flex items-center">
                             <button
-                                className="md:hidden mr-4 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                                className="md:hidden mr-4 text-gray-600 hover:text-gray-900"
                                 onClick={() => setIsSidebarOpen(true)}
                                 aria-label="Open sidebar"
                             >
                                 <MenuIcon />
                             </button>
                             <div>
-                                <h1 className="text-xl md:text-3xl font-bold text-gray-900 dark:text-gray-50">{viewTitles[activeView]}</h1>
-                                {activeView === 'dashboard' && <p className="hidden md:block mt-1 text-gray-500 dark:text-gray-400">Here are today's stats from your online store!</p>}
+                                <h1 className="text-xl md:text-3xl font-bold text-gray-900">{viewTitles[activeView]}</h1>
+                                {activeView === 'dashboard' && <p className="hidden md:block mt-1 text-gray-500">Here are today's stats from your online store!</p>}
                             </div>
                         </div>
                         <div className="flex items-center space-x-2 md:space-x-6">
@@ -320,7 +320,7 @@ const App: React.FC = () => {
                             <div className="relative" ref={notificationsRef}>
                                 <button 
                                     onClick={() => setIsNotificationsOpen(!isNotificationsOpen)}
-                                    className="relative p-2 text-gray-500 rounded-full hover:bg-gray-200 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 dark:focus:ring-offset-gray-900 focus:ring-indigo-500"
+                                    className="relative p-2 text-gray-500 rounded-full hover:bg-gray-200 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
                                 >
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 10-12 0v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
@@ -332,26 +332,26 @@ const App: React.FC = () => {
                                     )}
                                 </button>
                                 {isNotificationsOpen && (
-                                    <div className="absolute right-0 mt-2 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 z-10">
-                                        <div className="p-4 flex justify-between items-center border-b dark:border-gray-600">
-                                            <h3 className="font-semibold text-gray-800 dark:text-gray-100">Notifications</h3>
+                                    <div className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-xl border border-gray-200 z-10">
+                                        <div className="p-4 flex justify-between items-center border-b">
+                                            <h3 className="font-semibold text-gray-800">Notifications</h3>
                                             {unreadCount > 0 && (
                                                 <button onClick={handleMarkAllAsRead} className="text-sm text-[#4F46E5] hover:underline focus:outline-none">
                                                     Mark all as read
                                                 </button>
                                             )}
                                         </div>
-                                        <ul className="divide-y dark:divide-gray-600 max-h-80 overflow-y-auto no-scrollbar">
+                                        <ul className="divide-y max-h-80 overflow-y-auto no-scrollbar">
                                             {notifications.length > 0 ? notifications.map(notification => (
-                                                <li key={notification.id} className={`${!notification.read ? 'bg-indigo-50 dark:bg-indigo-900/40' : 'bg-white dark:bg-gray-800'}`}>
-                                                    <button onClick={() => handleNotificationClick(notification)} className="w-full text-left p-4 hover:bg-gray-50/50 dark:hover:bg-gray-700/50">
+                                                <li key={notification.id} className={`${!notification.read ? 'bg-indigo-50' : 'bg-white'}`}>
+                                                    <button onClick={() => handleNotificationClick(notification)} className="w-full text-left p-4 hover:bg-gray-50/50">
                                                         <div className="flex items-start">
                                                             {!notification.read && <div className="w-2 h-2 bg-indigo-500 rounded-full mt-1.5 mr-3 flex-shrink-0"></div>}
                                                             <div className="flex-1">
-                                                                <p className={`text-sm ${!notification.read ? 'text-gray-800 dark:text-gray-100 font-medium' : 'text-gray-600 dark:text-gray-300'}`}>
+                                                                <p className={`text-sm ${!notification.read ? 'text-gray-800 font-medium' : 'text-gray-600'}`}>
                                                                     {notification.message}
                                                                 </p>
-                                                                <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+                                                                <p className="text-xs text-gray-400 mt-1">
                                                                     {timeSince(new Date(notification.timestamp))}
                                                                 </p>
                                                             </div>
@@ -359,7 +359,7 @@ const App: React.FC = () => {
                                                     </button>
                                                 </li>
                                             )) : (
-                                                <li className="p-4 text-center text-sm text-gray-500 dark:text-gray-400">No notifications yet.</li>
+                                                <li className="p-4 text-center text-sm text-gray-500">No notifications yet.</li>
                                             )}
                                         </ul>
                                     </div>
@@ -369,15 +369,15 @@ const App: React.FC = () => {
                                 <button onClick={() => setIsUserMenuOpen(!isUserMenuOpen)} className="flex items-center space-x-3 cursor-pointer">
                                     <img className="h-9 w-9 rounded-full object-cover" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=100" alt="User avatar" />
                                     <div className="hidden sm:block">
-                                        <span className="font-semibold text-sm text-gray-800 dark:text-gray-200">Matthew Parker</span>
+                                        <span className="font-semibold text-sm text-gray-800">Matthew Parker</span>
                                     </div>
                                 </button>
                                 {isUserMenuOpen && (
-                                     <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-xl border border-gray-200 dark:border-gray-700 z-10">
-                                        <button onClick={() => { setActiveView('profile'); setIsUserMenuOpen(false); }} className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">Your Profile</button>
-                                        <button onClick={() => { setActiveView('settings'); setIsUserMenuOpen(false); }} className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">Settings</button>
-                                        <div className="border-t border-gray-200 dark:border-gray-600"></div>
-                                        <button onClick={() => setIsLoggedIn(false)} className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">Logout</button>
+                                     <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-xl border border-gray-200 z-10">
+                                        <button onClick={() => { setActiveView('profile'); setIsUserMenuOpen(false); }} className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Your Profile</button>
+                                        <button onClick={() => { setActiveView('settings'); setIsUserMenuOpen(false); }} className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</button>
+                                        <div className="border-t border-gray-200"></div>
+                                        <button onClick={() => setIsLoggedIn(false)} className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</button>
                                     </div>
                                 )}
                             </div>

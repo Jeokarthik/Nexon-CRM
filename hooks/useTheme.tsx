@@ -1,46 +1,32 @@
-import React, { createContext, useState, useEffect, useContext, useMemo } from 'react';
+import React, { createContext, useEffect, useContext, useMemo } from 'react';
 
-type Theme = 'light' | 'dark';
+type Theme = 'light'; // Only 'light' is a valid theme
 
 interface ThemeContextType {
     theme: Theme;
-    toggleTheme: () => void;
+    toggleTheme: () => void; // Keep for API compatibility, but it will do nothing
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [theme, setTheme] = useState<Theme>(() => {
-        try {
-            const savedTheme = localStorage.getItem('theme') as Theme;
-            if (savedTheme) {
-                return savedTheme;
-            }
-            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                return 'dark';
-            }
-        } catch (error) {
-           console.error("Could not access localStorage. Defaulting to light theme.", error);
-        }
-        return 'light';
-    });
+    const theme: Theme = 'light';
 
     useEffect(() => {
         const root = window.document.documentElement;
-        if (theme === 'dark') {
-            root.classList.add('dark');
-        } else {
-            root.classList.remove('dark');
-        }
+        // Always ensure dark mode is off
+        root.classList.remove('dark');
         try {
-            localStorage.setItem('theme', theme);
+            // Remove any saved theme preference
+            localStorage.removeItem('theme');
         } catch (error) {
-            console.error("Could not save theme to localStorage.", error);
+            console.error("Could not remove theme from localStorage.", error);
         }
-    }, [theme]);
+    }, []);
 
     const toggleTheme = () => {
-        setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
+        // This function does nothing now.
+        console.log("Dark mode has been removed.");
     };
 
     const value = useMemo(() => ({ theme, toggleTheme }), [theme]);

@@ -3,7 +3,6 @@ import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, L
 import { salesPerformanceData } from '../data';
 import { Deal, Lead, Task, DealStatus } from '../types';
 import { SalesIcon, VisitorsIcon, RefundsIcon } from './icons';
-import { useTheme } from '../hooks/useTheme';
 
 interface DashboardProps {
     deals: Deal[];
@@ -12,18 +11,16 @@ interface DashboardProps {
 }
 
 const Dashboard: React.FC<DashboardProps> = ({ deals, leads, tasks }) => {
-    const { theme } = useTheme();
-
-    const gridColor = theme === 'dark' ? '#374151' : '#e5e7eb';
-    const textColor = theme === 'dark' ? '#9ca3af' : '#6b7280';
-    const line1Color = theme === 'dark' ? '#f9fafb' : '#1f2937';
-    const line2Color = theme === 'dark' ? '#6b7280' : '#9ca3af';
-    const barColor = theme === 'dark' ? '#f9fafb' : '#1f2937';
+    const gridColor = '#e5e7eb';
+    const textColor = '#6b7280';
+    const line1Color = '#1f2937';
+    const line2Color = '#9ca3af';
+    const barColor = '#1f2937';
     
     const tooltipStyle = {
-        backgroundColor: theme === 'dark' ? 'rgb(31 41 55)' : '#ffffff',
-        borderColor: theme === 'dark' ? 'rgb(55 65 81)' : '#e5e7eb',
-        color: theme === 'dark' ? '#f9fafb' : '#1f2937',
+        backgroundColor: '#ffffff',
+        borderColor: '#e5e7eb',
+        color: '#1f2937',
         borderRadius: '12px',
     };
 
@@ -60,9 +57,9 @@ const Dashboard: React.FC<DashboardProps> = ({ deals, leads, tasks }) => {
     const TASK_COLORS = ['#22c55e', '#f97316'];
 
     const SummaryCard: React.FC<{ title: string; value: string; percentage: string; icon: React.ReactNode; isHighlighted?: boolean; }> = ({ title, value, percentage, icon, isHighlighted = false }) => (
-        <div className={`${isHighlighted ? 'bg-gray-900 dark:bg-indigo-600 text-white' : 'bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100'} p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow`}>
+        <div className={`${isHighlighted ? 'bg-gray-900 text-white' : 'bg-white text-gray-800'} p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow`}>
             <div className="flex justify-between items-start">
-                <div className={`p-2 rounded-lg ${isHighlighted ? 'bg-gray-800 dark:bg-indigo-500' : 'bg-gray-100 dark:bg-gray-700'}`}>
+                <div className={`p-2 rounded-lg ${isHighlighted ? 'bg-gray-800' : 'bg-gray-100'}`}>
                     {icon}
                 </div>
                  <span className={`text-sm font-semibold ${percentage.startsWith('+') ? 'text-green-500' : 'text-red-500'}`}>{percentage}</span>
@@ -74,8 +71,8 @@ const Dashboard: React.FC<DashboardProps> = ({ deals, leads, tasks }) => {
     
     // FIX: Changed children prop type from React.ReactNode to React.ReactElement to match what ResponsiveContainer expects.
     const ChartContainer: React.FC<{ title: string; children: React.ReactElement }> = ({ title, children }) => (
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
-            <h2 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">{title}</h2>
+        <div className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+            <h2 className="text-lg font-semibold mb-4 text-gray-900">{title}</h2>
             <div style={{width: '100%', height: 300}}>
                 <ResponsiveContainer>
                     {children}
@@ -105,8 +102,8 @@ const Dashboard: React.FC<DashboardProps> = ({ deals, leads, tasks }) => {
                     </LineChart>
                 </ChartContainer>
                 
-                <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
-                    <h2 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Lead Sources</h2>
+                <div className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                    <h2 className="text-lg font-semibold mb-4 text-gray-900">Lead Sources</h2>
                     <div className="relative" style={{ width: '100%', height: 300 }}>
                         <ResponsiveContainer>
                             <PieChart>
@@ -120,8 +117,8 @@ const Dashboard: React.FC<DashboardProps> = ({ deals, leads, tasks }) => {
                             </PieChart>
                         </ResponsiveContainer>
                         <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                            <span className="text-4xl font-bold text-gray-800 dark:text-gray-100">{totalLeadSources}</span>
-                            <span className="text-sm text-gray-500 dark:text-gray-400">Total Leads</span>
+                            <span className="text-4xl font-bold text-gray-800">{totalLeadSources}</span>
+                            <span className="text-sm text-gray-500">Total Leads</span>
                         </div>
                     </div>
                 </div>
@@ -137,8 +134,8 @@ const Dashboard: React.FC<DashboardProps> = ({ deals, leads, tasks }) => {
                     </BarChart>
                 </ChartContainer>
 
-                 <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
-                    <h2 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Tasks Overview</h2>
+                 <div className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                    <h2 className="text-lg font-semibold mb-4 text-gray-900">Tasks Overview</h2>
                     <div className="relative" style={{ width: '100%', height: 300 }}>
                         <ResponsiveContainer>
                             <PieChart>
@@ -152,8 +149,8 @@ const Dashboard: React.FC<DashboardProps> = ({ deals, leads, tasks }) => {
                             </PieChart>
                         </ResponsiveContainer>
                         <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                            <span className="text-4xl font-bold text-gray-800 dark:text-gray-100">{totalTasks}</span>
-                            <span className="text-sm text-gray-500 dark:text-gray-400">Total Tasks</span>
+                            <span className="text-4xl font-bold text-gray-800">{totalTasks}</span>
+                            <span className="text-sm text-gray-500">Total Tasks</span>
                         </div>
                     </div>
                 </div>

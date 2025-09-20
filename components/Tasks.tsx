@@ -32,18 +32,18 @@ const TaskModal: React.FC<TaskModalProps> = ({ task, onSave, onClose }) => {
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50 p-4" onClick={onClose}>
-            <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 w-full max-w-lg" onClick={e => e.stopPropagation()}>
-                <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 p-4 border-b dark:border-gray-600">{task ? 'Edit Task' : 'Add Task'}</h2>
+            <div className="bg-white rounded-xl border border-gray-200 w-full max-w-lg" onClick={e => e.stopPropagation()}>
+                <h2 className="text-xl font-bold text-gray-900 p-4 border-b">{task ? 'Edit Task' : 'Add Task'}</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <input name="title" value={formData.title} onChange={handleChange} placeholder="Task Title" className="w-full p-2 border rounded sm:col-span-2 dark:bg-gray-700 dark:border-gray-600" required />
-                        <input name="relatedTo" value={formData.relatedTo} onChange={handleChange} placeholder="Related To (e.g., Deal, Contact)" className="w-full p-2 border rounded sm:col-span-2 dark:bg-gray-700 dark:border-gray-600" />
-                        <input name="dueDate" type="date" value={formData.dueDate} onChange={handleChange} className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600" required />
-                        <input name="dueTime" type="time" value={formData.dueTime} onChange={handleChange} className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600" />
-                         <select name="priority" value={formData.priority} onChange={handleChange} className="w-full p-2 border rounded bg-white dark:bg-gray-700 dark:border-gray-600">
+                        <input name="title" value={formData.title} onChange={handleChange} placeholder="Task Title" className="w-full p-2 border rounded sm:col-span-2" required />
+                        <input name="relatedTo" value={formData.relatedTo} onChange={handleChange} placeholder="Related To (e.g., Deal, Contact)" className="w-full p-2 border rounded sm:col-span-2" />
+                        <input name="dueDate" type="date" value={formData.dueDate} onChange={handleChange} className="w-full p-2 border rounded" required />
+                        <input name="dueTime" type="time" value={formData.dueTime} onChange={handleChange} className="w-full p-2 border rounded" />
+                         <select name="priority" value={formData.priority} onChange={handleChange} className="w-full p-2 border rounded bg-white">
                             {Object.values(TaskPriority).map(p => <option key={p} value={p}>{p}</option>)}
                         </select>
-                         <select name="reminder" value={formData.reminder} onChange={handleChange} className="w-full p-2 border rounded bg-white dark:bg-gray-700 dark:border-gray-600">
+                         <select name="reminder" value={formData.reminder} onChange={handleChange} className="w-full p-2 border rounded bg-white">
                             <option value="none">No reminder</option>
                             <option value="5m">5 mins before</option>
                             <option value="15m">15 mins before</option>
@@ -51,8 +51,8 @@ const TaskModal: React.FC<TaskModalProps> = ({ task, onSave, onClose }) => {
                             <option value="1d">1 day before</option>
                         </select>
                     </div>
-                    <div className="flex justify-end p-4 border-t dark:border-gray-600">
-                        <button type="button" onClick={onClose} className="px-4 py-2 bg-gray-200 dark:bg-gray-600 rounded mr-2">Cancel</button>
+                    <div className="flex justify-end p-4 border-t">
+                        <button type="button" onClick={onClose} className="px-4 py-2 bg-gray-200 rounded mr-2">Cancel</button>
                         <button type="submit" className="px-4 py-2 bg-[#4F46E5] text-white rounded">Save Task</button>
                     </div>
                 </form>
@@ -69,13 +69,13 @@ interface TasksProps {
 
 const getPriorityClasses = (priority: TaskPriority, completed: boolean) => {
     if (completed) {
-        return 'border-gray-300 dark:border-gray-600 text-gray-400 dark:text-gray-500 bg-gray-100 dark:bg-gray-700';
+        return 'border-gray-300 text-gray-400 bg-gray-100';
     }
     switch (priority) {
-        case TaskPriority.High: return 'border-red-500 text-red-600 bg-red-50 dark:bg-red-900/50 dark:text-red-400';
-        case TaskPriority.Medium: return 'border-amber-500 text-amber-600 bg-amber-50 dark:bg-amber-900/50 dark:text-amber-400';
-        case TaskPriority.Low: return 'border-blue-500 text-blue-600 bg-blue-50 dark:bg-blue-900/50 dark:text-blue-400';
-        default: return 'border-gray-400 text-gray-600 bg-gray-50 dark:bg-gray-700 dark:text-gray-300';
+        case TaskPriority.High: return 'border-red-500 text-red-600 bg-red-50';
+        case TaskPriority.Medium: return 'border-amber-500 text-amber-600 bg-amber-50';
+        case TaskPriority.Low: return 'border-blue-500 text-blue-600 bg-blue-50';
+        default: return 'border-gray-400 text-gray-600 bg-gray-50';
     }
 };
 
@@ -115,7 +115,7 @@ const Tasks: React.FC<TasksProps> = ({ tasks, setTasks }) => {
 
         if (due < today) return 'text-red-500';
         if (due.getTime() === today.getTime()) return 'text-amber-500';
-        return 'text-gray-600 dark:text-gray-300';
+        return 'text-gray-600';
     };
     
     const formatTime = (time: string): string => {
@@ -151,20 +151,20 @@ const Tasks: React.FC<TasksProps> = ({ tasks, setTasks }) => {
 
     return (
         <div>
-            <h1 className="text-2xl font-bold mb-6 text-gray-900 sr-only md:not-sr-only dark:text-gray-100">Tasks & Reminders</h1>
+            <h1 className="text-2xl font-bold mb-6 text-gray-900 sr-only md:not-sr-only">Tasks & Reminders</h1>
             <div className="flex flex-wrap gap-4 mb-4">
                 <input
                     type="text"
                     placeholder="Search by title or related entity..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full sm:w-auto flex-grow max-w-md p-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 outline-none dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
+                    className="w-full sm:w-auto flex-grow max-w-md p-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 outline-none"
                     aria-label="Search tasks"
                 />
                  <select
                     value={priorityFilter}
                     onChange={(e) => setPriorityFilter(e.target.value as TaskPriority | 'all')}
-                    className="p-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 outline-none dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
+                    className="p-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 outline-none"
                     aria-label="Filter by priority"
                 >
                     <option value="all">All Priorities</option>
@@ -175,7 +175,7 @@ const Tasks: React.FC<TasksProps> = ({ tasks, setTasks }) => {
                 <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value as 'dueDate' | 'priority')}
-                    className="p-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 outline-none dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
+                    className="p-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 outline-none"
                     aria-label="Sort by"
                 >
                     <option value="dueDate">Sort by Due Date</option>
@@ -186,12 +186,12 @@ const Tasks: React.FC<TasksProps> = ({ tasks, setTasks }) => {
                     <span className="ml-2">Add Task</span>
                 </button>
             </div>
-            <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
-                <ul className="divide-y divide-gray-200 dark:divide-gray-700">
+            <div className="bg-white rounded-xl border border-gray-200 shadow-sm">
+                <ul className="divide-y divide-gray-200">
                     {filteredAndSortedTasks.map(task => (
                         <li key={task.id} className={`flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 group transition-colors duration-200 ${
                             task.priority === TaskPriority.High && !task.completed
-                                ? 'py-4 pr-4 pl-3 border-l-4 border-red-500 bg-red-50/50 dark:bg-red-900/20'
+                                ? 'py-4 pr-4 pl-3 border-l-4 border-red-500 bg-red-50/50'
                                 : 'p-4 border-l-4 border-transparent'
                         }`}>
                             <div className="flex items-center">
@@ -199,14 +199,14 @@ const Tasks: React.FC<TasksProps> = ({ tasks, setTasks }) => {
                                     type="checkbox"
                                     checked={task.completed}
                                     onChange={() => toggleTaskCompletion(task.id)}
-                                    className="h-5 w-5 rounded border-gray-300 text-[#4F46E5] focus:ring-[#4F46E5] bg-transparent dark:bg-gray-600 dark:border-gray-500 flex-shrink-0"
+                                    className="h-5 w-5 rounded border-gray-300 text-[#4F46E5] focus:ring-[#4F46E5] bg-transparent flex-shrink-0"
                                     aria-labelledby={`task-title-${task.id}`}
                                 />
                                 <div className="ml-4">
-                                    <p id={`task-title-${task.id}`} className={`font-medium ${task.completed ? 'line-through text-gray-500' : 'text-gray-900 dark:text-gray-100'}`}>
+                                    <p id={`task-title-${task.id}`} className={`font-medium ${task.completed ? 'line-through text-gray-500' : 'text-gray-900'}`}>
                                         {task.title}
                                     </p>
-                                    <p className={`text-sm ${task.completed ? 'text-gray-400' : 'text-gray-500 dark:text-gray-400'}`}>
+                                    <p className={`text-sm ${task.completed ? 'text-gray-400' : 'text-gray-500'}`}>
                                         Related to: {task.relatedTo}
                                     </p>
                                 </div>
@@ -220,12 +220,12 @@ const Tasks: React.FC<TasksProps> = ({ tasks, setTasks }) => {
                                         {new Date(task.dueDate).toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric' })}
                                     </span>
                                     {task.dueTime && !task.completed && (
-                                        <span className="text-xs text-gray-500 dark:text-gray-400">{formatTime(task.dueTime)}</span>
+                                        <span className="text-xs text-gray-500">{formatTime(task.dueTime)}</span>
                                     )}
                                 </div>
                                 <div className="flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <button onClick={() => { setEditingTask(task); setIsModalOpen(true); }} className="p-1 text-gray-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400"><EditIcon/></button>
-                                    <button onClick={() => handleDeleteTask(task.id)} className="p-1 text-gray-500 hover:text-red-600 dark:text-gray-400 dark:hover:text-red-400"><TrashIcon/></button>
+                                    <button onClick={() => { setEditingTask(task); setIsModalOpen(true); }} className="p-1 text-gray-500 hover:text-indigo-600"><EditIcon/></button>
+                                    <button onClick={() => handleDeleteTask(task.id)} className="p-1 text-gray-500 hover:text-red-600"><TrashIcon/></button>
                                 </div>
                             </div>
                         </li>

@@ -77,12 +77,12 @@ const LeadDetailModal: React.FC<LeadDetailModalProps> = ({ lead, onClose, onSave
             if (name === 'status') {
                 return (
                      <div className="sm:col-span-1">
-                        <label className="text-sm font-medium text-gray-500 dark:text-gray-400">{label}</label>
+                        <label className="text-sm font-medium text-gray-500">{label}</label>
                         <select
                             name="status"
                             value={editableLead.status}
                             onChange={handleInputChange}
-                            className="mt-1 block w-full p-2 rounded-lg border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 sm:text-sm bg-white outline-none dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100"
+                            className="mt-1 block w-full p-2 rounded-lg border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 sm:text-sm bg-white outline-none"
                         >
                             <option>New</option>
                             <option>Contacted</option>
@@ -97,13 +97,13 @@ const LeadDetailModal: React.FC<LeadDetailModalProps> = ({ lead, onClose, onSave
             }
             return (
                 <div className="sm:col-span-1">
-                    <label className="text-sm font-medium text-gray-500 dark:text-gray-400">{label}</label>
+                    <label className="text-sm font-medium text-gray-500">{label}</label>
                     <input
                         type={type}
                         name={name}
                         value={value}
                         onChange={handleInputChange}
-                        className="mt-1 block w-full p-2 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 sm:text-sm bg-white outline-none dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100"
+                        className="mt-1 block w-full p-2 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 sm:text-sm bg-white outline-none"
                     />
                 </div>
             );
@@ -114,29 +114,29 @@ const LeadDetailModal: React.FC<LeadDetailModalProps> = ({ lead, onClose, onSave
         }
         return (
             <div className="sm:col-span-1">
-                <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{label}</p>
-                <p className="mt-1 text-sm text-gray-900 dark:text-gray-100">{name === 'value' ? `$${(value as number).toLocaleString()}` : value}</p>
+                <p className="text-sm font-medium text-gray-500">{label}</p>
+                <p className="mt-1 text-sm text-gray-900">{name === 'value' ? `$${(value as number).toLocaleString()}` : value}</p>
             </div>
         );
     };
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50 p-4" onClick={onClose}>
-            <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 w-full max-w-2xl max-h-[90vh] flex flex-col" onClick={e => e.stopPropagation()}>
-                <div className="flex justify-between items-center p-4 border-b border-gray-200 dark:border-gray-600">
-                    <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">{isNew ? "Add New Lead" : editableLead.name}</h2>
+            <div className="bg-white rounded-xl border border-gray-200 w-full max-w-2xl max-h-[90vh] flex flex-col" onClick={e => e.stopPropagation()}>
+                <div className="flex justify-between items-center p-4 border-b border-gray-200">
+                    <h2 className="text-xl font-bold text-gray-900">{isNew ? "Add New Lead" : editableLead.name}</h2>
                     <div>
                         {!isNew && !isEditing && (
-                            <button onClick={() => setIsEditing(true)} className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300">
+                            <button onClick={() => setIsEditing(true)} className="p-2 rounded-full hover:bg-gray-100 text-gray-600">
                                 <EditIcon />
                             </button>
                         )}
                          {!isNew && (
-                            <button onClick={handleDelete} className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 hover:text-red-500">
+                            <button onClick={handleDelete} className="p-2 rounded-full hover:bg-gray-100 text-gray-600 hover:text-red-500">
                                 <TrashIcon />
                             </button>
                         )}
-                        <button onClick={onClose} className="ml-2 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300">
+                        <button onClick={onClose} className="ml-2 p-2 rounded-full hover:bg-gray-100 text-gray-600">
                             <CloseIcon />
                         </button>
                     </div>
@@ -154,12 +154,12 @@ const LeadDetailModal: React.FC<LeadDetailModalProps> = ({ lead, onClose, onSave
                     </div>
 
                     <div className="mt-6">
-                        <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">Interaction History</h3>
+                        <h3 className="text-lg font-medium text-gray-900 mb-4">Interaction History</h3>
                         {isEditing && (
                             <div className="mb-4">
                                 <textarea
                                     rows={3}
-                                    className="w-full p-2 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 sm:text-sm bg-white outline-none dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100"
+                                    className="w-full p-2 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 sm:text-sm bg-white outline-none"
                                     placeholder="Add a new note..."
                                     value={newNote}
                                     onChange={(e) => setNewNote(e.target.value)}
@@ -169,18 +169,18 @@ const LeadDetailModal: React.FC<LeadDetailModalProps> = ({ lead, onClose, onSave
                         )}
                         <div className="space-y-4 max-h-60 overflow-y-auto pr-2">
                            {editableLead.notes.length > 0 ? editableLead.notes.map(note => (
-                                <div key={note.id} className="p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
-                                    <p className="text-xs text-gray-500 dark:text-gray-400">{new Date(note.date).toLocaleDateString()}</p>
-                                    <p className="text-sm text-gray-800 dark:text-gray-200">{note.note}</p>
+                                <div key={note.id} className="p-3 bg-gray-50 rounded-lg">
+                                    <p className="text-xs text-gray-500">{new Date(note.date).toLocaleDateString()}</p>
+                                    <p className="text-sm text-gray-800">{note.note}</p>
                                 </div>
-                            )) : <p className="text-sm text-gray-500 dark:text-gray-400">No notes yet.</p>}
+                            )) : <p className="text-sm text-gray-500">No notes yet.</p>}
                         </div>
                     </div>
                 </div>
 
                 {isEditing && (
-                    <div className="flex justify-end p-4 border-t border-gray-200 dark:border-gray-600">
-                        <button onClick={handleCancel} className="px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-500 dark:hover:bg-gray-600 mr-2">Cancel</button>
+                    <div className="flex justify-end p-4 border-t border-gray-200">
+                        <button onClick={handleCancel} className="px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 mr-2">Cancel</button>
                         <button onClick={handleSave} className="px-4 py-2 bg-[#4F46E5] text-white rounded-lg hover:bg-[#6366F1]">{isNew ? 'Add Lead' : 'Save Changes'}</button>
                     </div>
                 )}

@@ -75,7 +75,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeView, setActiveView, onLogout, 
                 className={`fixed inset-0 bg-black bg-opacity-50 z-20 md:hidden transition-opacity ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
                 onClick={() => setIsOpen(false)}
             ></div>
-            <aside className={`fixed inset-y-0 left-0 w-64 flex-shrink-0 bg-gray-900 dark:bg-gray-950 p-4 flex flex-col justify-between z-30 transform transition-transform duration-300 ease-in-out md:relative md:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+            <aside className={`fixed inset-y-0 left-0 w-64 flex-shrink-0 bg-gray-900 p-4 flex flex-col justify-between z-30 transform transition-transform duration-300 ease-in-out md:relative md:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
                 <div>
                     <div className="flex items-center justify-between mb-8 px-2">
                          <button 
